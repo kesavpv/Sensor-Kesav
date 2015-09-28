@@ -2,7 +2,6 @@ package org.usfirst.frc.team1165.robot.subsystems;
 
 import org.usfirst.frc.team1165.robot.commands.ReportAccelerometer;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
