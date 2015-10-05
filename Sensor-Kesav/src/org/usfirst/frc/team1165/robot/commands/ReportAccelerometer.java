@@ -1,15 +1,12 @@
 package org.usfirst.frc.team1165.robot.commands;
 
 import org.usfirst.frc.team1165.robot.Robot;
-import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
-
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ReportAccelerometer extends Command
 {
-
 	BuiltInAccelerometer a = new BuiltInAccelerometer();
     
 	public ReportAccelerometer()

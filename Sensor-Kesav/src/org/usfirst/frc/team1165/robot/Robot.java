@@ -1,11 +1,17 @@
-
 package org.usfirst.frc.team1165.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.DrawMode;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ShapeMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -16,11 +22,14 @@ import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
  */
 public class Robot extends IterativeRobot
 {
-
-	public static final Accelerometer accelerometer = new Accelerometer(); 
+    
+    public static final Accelerometer accelerometer = new Accelerometer(); 
 	public static OI oi;
 	
-    Command autonomousCommand;
+	int session;
+    Image frame;
+
+	Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -30,6 +39,8 @@ public class Robot extends IterativeRobot
     {
 		oi = new OI();
         // instantiate the command used for the autonomous period
+		
+		
     }
 	
 	public void disabledPeriodic()
@@ -83,5 +94,36 @@ public class Robot extends IterativeRobot
     public void testPeriodic()
     {
         LiveWindow.run();
+    }
+
+    public void operatorControl()
+    {
+        NIVision.IMAQdxStartAcquisition(session);
+
+        /**
+         * grab an image, draw the circle, and provide it for the camera server
+         * which will in turn send it to the dashboard.
+         */
+        NIVision.Rect rect = new NIVision.Rect(10, 10, 100, 100);
+
+        while (isOperatorControl() && isEnabled())
+        {
+
+            NIVision.IMAQdxGrab(session, frame, 1);
+            NIVision.imaqDrawShapeOnImage(frame, frame, rect,
+                    DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f);
+            
+            CameraServer.getInstance().setImage(frame);
+
+            /** robot code here! **/
+            Timer.delay(0.005);		// wait for a motor update time
+        }
+        
+        NIVision.IMAQdxStopAcquisition(session);
+    }
+
+    public void test()
+    {
+    	//
     }
 }
