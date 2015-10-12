@@ -2,8 +2,6 @@ package org.usfirst.frc.team1165.robot.subsystems;
 
 import com.ni.vision.NIVision.Image;
 
-import org.usfirst.frc.team1165.robot.commands.Report;
-
 import com.ni.vision.NIVision;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -14,13 +12,11 @@ public class Camera extends Subsystem
 	int session;
 	Image frame;
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	// Put methods for controlling this subsystem here. Call these from Commands.
 
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new Report());
 	}
 
 	public Camera()
@@ -29,6 +25,7 @@ public class Camera extends Subsystem
 
 		// the camera name (ex "cam0") can be found through the roborio web interface
 		session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		
 		NIVision.IMAQdxConfigureGrab(session);
 
 		NIVision.IMAQdxStartAcquisition(session);

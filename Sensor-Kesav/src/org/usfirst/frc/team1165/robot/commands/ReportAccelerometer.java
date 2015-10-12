@@ -23,9 +23,9 @@ public class ReportAccelerometer extends Command
     
 	protected void execute() 
     {
-    	SmartDashboard.putDouble("Accelerometer X", a.getX());
-    	SmartDashboard.putDouble("Accelerometer Y", a.getY());
-    	SmartDashboard.putDouble("Accelerometer Z", a.getZ());
+    	SmartDashboard.putNumber("Accelerometer X", a.getX());
+    	SmartDashboard.putNumber("Accelerometer Y", a.getY());
+    	SmartDashboard.putNumber("Accelerometer Z", a.getZ());
     }
 
     // Make this return true when this Command no longer needs to run execute()

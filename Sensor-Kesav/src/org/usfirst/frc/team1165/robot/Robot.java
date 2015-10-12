@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team1165.robot.subsystems.AbsoluteEncoder;
 import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
 
 import com.ni.vision.NIVision;
@@ -24,6 +26,7 @@ public class Robot extends IterativeRobot
 {
     
     public static final Accelerometer accelerometer = new Accelerometer(); 
+    public static final AbsoluteEncoder absoluteEncoder = new AbsoluteEncoder();
 	public static OI oi;
 	
 	int session;
