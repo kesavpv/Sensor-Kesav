@@ -1,0 +1,29 @@
+package org.usfirst.frc.team1165.robot.subsystems;
+
+import org.usfirst.frc.team1165.robot.commands.ReportVexRangeFinderK;
+
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class VexRangeFinderK extends Subsystem
+{
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
+	Ultrasonic ultra = new Ultrasonic(1,1);
+	public void initDefaultCommand()
+	{
+		// Set the default command for a subsystem here.
+		setDefaultCommand(new ReportVexRangeFinderK());
+	}
+
+	public void report()
+	{
+		// creates the ultra object andassigns ultra to be an ultrasonic sensor which uses DigitalOutput 1 for the echo pulse and DigitalInput 1 for the trigger pulse
+		
+		ultra.setAutomaticMode(true); // turns on automatic mode
+		
+		SmartDashboard.putNumber("Range(in.)", ultra.getRangeInches());
+		SmartDashboard.putNumber("Range(mm.)", ultra.getRangeMM());
+	}
+}

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1165.robot.subsystems.AbsoluteEncoder;
 import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
+import org.usfirst.frc.team1165.robot.subsystems.VexRangeFinderK;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.DrawMode;
@@ -27,7 +28,8 @@ public class Robot extends IterativeRobot
     
     public static final Accelerometer accelerometer = new Accelerometer(); 
     public static final AbsoluteEncoder absoluteEncoder = new AbsoluteEncoder();
-	public static OI oi;
+	public static final VexRangeFinderK vexRangeFinderK = new VexRangeFinderK();
+    public static OI oi;
 	
 	int session;
     Image frame;
