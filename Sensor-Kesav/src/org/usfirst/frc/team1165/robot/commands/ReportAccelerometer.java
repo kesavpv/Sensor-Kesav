@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1165.robot.commands;
 
-import org.usfirst.frc.team1165.robot.Robot;
+//import org.usfirst.frc.team1165.robot.Robot;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,7 +11,7 @@ public class ReportAccelerometer extends Command
     
 	public ReportAccelerometer()
     {
-        requires(Robot.accelerometer);
+        //requires(Robot.accelerometer);
     }
 
     // Called just before this Command runs the first time

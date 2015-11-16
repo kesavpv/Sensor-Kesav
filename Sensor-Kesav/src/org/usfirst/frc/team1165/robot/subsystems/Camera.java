@@ -7,6 +7,19 @@ import com.ni.vision.NIVision;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/*
+	Add a Camera subsystem to your Eclipse project
+	Using Intermediate Vision example:
+		Add NIVision code to configure and start camera acquisition
+		Add NIVision code to grab a frame from the camera and give it to the CameraServer
+	Add code to display images using a default command
+	Add code necessary to instantiate your subsystem
+	Make sure your code builds successfully
+	Using Git, get your code to the laptop
+	Test your code on the roboRIO
+		Be sure to add the necessary camera viewer to the SmartDashboard
+ */
+
 public class Camera extends Subsystem
 {
 	int session;
@@ -25,7 +38,7 @@ public class Camera extends Subsystem
 
 		// the camera name (ex "cam0") can be found through the roborio web interface
 		session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		
+
 		NIVision.IMAQdxConfigureGrab(session);
 
 		NIVision.IMAQdxStartAcquisition(session);

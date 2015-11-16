@@ -52,4 +52,8 @@ public class ImuDigitalComboBoard extends Subsystem {
 		SmartDashboard.putNumber("Gyroscope Angle Y", yGyro.getRate());
 		SmartDashboard.putNumber("Gyroscope Angle Z", zGyro.getRate());
 	}
+	public void calibrateGyro()
+	{
+		gyro.calibrate(5.0);
+	}
 }
