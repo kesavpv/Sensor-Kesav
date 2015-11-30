@@ -6,8 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ReportVexRangeFinderK extends Command {
 
-    public ReportVexRangeFinderK() 
-    {
+    public ReportVexRangeFinderK() {
        requires(Robot.vexRangeFinderK);
     }
 
@@ -16,9 +15,8 @@ public class ReportVexRangeFinderK extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute()
-    {
-    	
+    protected void execute() {
+    	Robot.vexRangeFinderK.report();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -20,4 +20,7 @@ public class RobotMap
     // public static int rangefinderModule = 1;
 
 	public static int gyroInterruptChannel = 9;
+	public static int absoluteEncoderPort = 0;
+	public static int redLedChannel = 1;
+	public static int greenLedChannel = 2;
 }
