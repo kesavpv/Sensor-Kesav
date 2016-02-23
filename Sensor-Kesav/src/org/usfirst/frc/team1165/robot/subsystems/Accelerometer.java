@@ -27,7 +27,7 @@ public class Accelerometer
 
 	// Set the default command to report values on the SmartDashboard.
 	public void initDefaultCommand() {
-		setDefaultCommand(ReportAccelerometer);
+		setDefaultCommand(new ReportAccelerometer());
 	}
 	
 	// Reports the values of this subsystem on the SmartDashBoard.
