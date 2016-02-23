@@ -11,27 +11,23 @@ public class Accelerometer
 	private BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
 	
 	// Returns X axis acceleration
-	public double getX()
-	{
+	public double getX() {
 		return accelerometer.getX();
 	}
 	
 	// Returns Y axis acceleration
-	public double getY()
-	{
+	public double getY() {
 		return accelerometer.getY();
 	}
 	
 	// Returns Z axis acceleration
-	public double getZ()
-	{
+	public double getZ() {
 		return accelerometer.getZ();
 	}
 
 	// Set the default command to report values on the SmartDashboard.
-	public void initDefaultCommand()
-	{
-		//setDefaultCommand(new Reporter(this));
+	public void initDefaultCommand() {
+		setDefaultCommand(ReportAccelerometer);
 	}
 	
 	// Reports the values of this subsystem on the SmartDashBoard.
