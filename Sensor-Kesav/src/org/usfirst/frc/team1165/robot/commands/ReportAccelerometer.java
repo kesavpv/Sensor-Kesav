@@ -7,11 +7,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ReportAccelerometer extends Command
 {
-	BuiltInAccelerometer a = new BuiltInAccelerometer();
-    
 	public ReportAccelerometer() {
-        //requires(Robot.accelerometer);
-    }
+	    	requires(Robot.accelerometer);
+	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
