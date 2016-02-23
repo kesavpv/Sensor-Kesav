@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ReportAccelerometer_Combo extends Command
 {
-	public ReportAccelerometer() {
+	public ReportAccelerometer_Combo() {
 		requires(Robot.imu);
 	}
 
