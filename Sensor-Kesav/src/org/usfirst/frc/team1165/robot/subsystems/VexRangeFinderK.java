@@ -1,12 +1,11 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
-import org.usfirst.frc.team1165.robot.commands.ReportVexRangeFinderK;
+import org.usfirst.frc.team1165.robot.commands.Reporter;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class VexRangeFinderK extends Subsystem
+public class VexRangeFinderK extends ReportableSubsystem
 {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -14,7 +13,7 @@ public class VexRangeFinderK extends Subsystem
 	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new ReportVexRangeFinderK());
+		setDefaultCommand(new Reporter(this));
 	}
 
 	public void report()
