@@ -19,8 +19,10 @@ public class RobotMap
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 
-	public static int gyroInterruptChannel = 9;
-	public static int absoluteEncoderPort = 0;
-	public static int redLedChannel = 1;
-	public static int greenLedChannel = 2;
+	public static int
+		gyroCalibrationTime = 1,
+		gyroInterruptChannel = 9,
+		absoluteEncoderPort = 0,
+		redLedChannel = 1,
+		greenLedChannel = 2;
 }

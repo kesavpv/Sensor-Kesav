@@ -32,13 +32,13 @@ import com.ni.vision.NIVision.ShapeMode;
  */
 public class Robot extends IterativeRobot
 {
-
-	public static final Accelerometer accelerometer = new Accelerometer(); 
-	public static final AbsoluteEncoderK absoluteEncoder = new AbsoluteEncoderK();
-	public static final VexRangeFinderK vexRangeFinderK = new VexRangeFinderK();
 	public static OI oi;
-	public static final MaxBotixProximitySensorK mb1013 = new MaxBotixProximitySensorK(Model.MB1013, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(3));
+	
+	public static final AbsoluteEncoderK absoluteEncoder = new AbsoluteEncoderK();
+	public static final Accelerometer accelerometer = new Accelerometer(); 
 	public static final ImuDigitalComboBoard imu = new ImuDigitalComboBoard(Port.kOnboard, new DigitalInput(RobotMap.gyroInterruptChannel));
+	public static final MaxBotixProximitySensorK mb1013 = new MaxBotixProximitySensorK(Model.MB1013, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(3));
+	public static final VexRangeFinderK vexRangeFinderK = new VexRangeFinderK();
 
 	int session;
 	Image frame;

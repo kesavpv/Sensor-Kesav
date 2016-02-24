@@ -2,10 +2,11 @@ package org.usfirst.frc.team1165.robot.subsystems;
 
 import com.ni.vision.NIVision.Image;
 
+import org.usfirst.frc.team1165.robot.commands.Reporter;
+
 import com.ni.vision.NIVision;
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /*
 	Add a Camera subsystem to your Eclipse project
@@ -20,16 +21,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 		Be sure to add the necessary camera viewer to the SmartDashboard
  */
 
-public class Camera extends Subsystem
+public class Camera extends ReportableSubsystem
 {
 	int session;
 	Image frame;
 
 	// Put methods for controlling this subsystem here. Call these from Commands.
 
-	public void initDefaultCommand()
-	{
-		// Set the default command for a subsystem here.
+	public void initDefaultCommand() {
+		setDefaultCommand(new Reporter(this));
 	}
 
 	public Camera()
@@ -44,7 +44,7 @@ public class Camera extends Subsystem
 		NIVision.IMAQdxStartAcquisition(session);
 	}
 
-	public void reportCamera()
+	public void report()
 	{
 		/**
 		 * grab an image, draw the circle, and provide it for the camera server
