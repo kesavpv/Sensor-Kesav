@@ -12,12 +12,10 @@ public class Accelerometer extends ReportableSubsystem
 {
 	private BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
 	
-	// Set the default command to report values on the SmartDashboard.
 	public void initDefaultCommand() {
 		setDefaultCommand(new Reporter(this));
 	}
 	
-	// Reports the values of this subsystem on the SmartDashBoard.
 	public void report()
 	{
 		SmartDashboard.putNumber("roboRIO X Accel", accelerometer.getX());

@@ -33,6 +33,7 @@ public class ImuDigitalComboBoard extends ReportableSubsystem {
 	public void initDefaultCommand() {
        setDefaultCommand(new Reporter(this));
     }
+	
 	public void report()
 	{
 		// Report Accelerometer

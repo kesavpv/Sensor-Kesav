@@ -18,21 +18,18 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class PIDDemoK extends PIDSubsystem
 {
-	private final static double kP = 0.05;
-	private final static double kI = 0.0;
-	private final static double kD = 0;
+	private final static double
+		kP = 0.05,
+		kI = 0.0,
+		kD = 0,
+		minPosition = 0.0,
+		maxPosition = 360.0,
+		minFrequency = -0.8,
+		maxFrequency = 0.8,
+		tolerance = 3;
 	
-	private final static double minPosition = 0.0;
-	private final static double maxPosition = 360.0;
+	private PidLeds leds = new PidLeds(new Led(RobotMap.RED_LED_CHANNEL), new Led(RobotMap.GREEN_LED_CHANNEL));
 	
-	private final static double minFrequency = -0.8;
-	private final static double maxFrequency = 0.8;
-	
-	private final static double tolerance = 3;
-	
-	private PidLeds leds = new PidLeds(new Led(RobotMap.redLedChannel), new Led(RobotMap.greenLedChannel));
-	
-	// Initialize your subsystem here
 	public PIDDemoK()
 	{
 		super(kP, kI, kD);
@@ -45,25 +42,17 @@ public class PIDDemoK extends PIDSubsystem
 	}
 
 	@Override
-	protected void initDefaultCommand()
-	{
+	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	protected double returnPIDInput()
-	{
-		// Return your input value for the PID loop
-		// e.g. a sensor, like a potentiometer:
-		// yourPot.getAverageVoltage() / kYourMaxVoltage;
+	protected double returnPIDInput() {
 		return Robot.absoluteEncoder.pidGet();
 	}
 	
 	@Override
-	protected void usePIDOutput(double output)
-	{
-		// Use output to drive your system, like a motor
-		// e.g. yourMotor.set(output);
+	protected void usePIDOutput(double output) {
 		leds.pidWrite(output);
 	}
 }

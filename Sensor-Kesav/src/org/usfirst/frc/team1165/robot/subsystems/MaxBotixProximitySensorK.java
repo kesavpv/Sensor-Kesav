@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
+import org.usfirst.frc.team1165.robot.commands.Reporter;
 import org.usfirst.frc.team1165.util.SampleRate;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Class for obtaining data from a MaxBotix MB1013 or MB1200 Range Finder
  */
-public class MaxBotixProximitySensorK implements Runnable
+public class MaxBotixProximitySensorK extends ReportableSubsystem implements Runnable
 {
 	// Supported models:
 	public enum Model
@@ -62,26 +63,25 @@ public class MaxBotixProximitySensorK implements Runnable
 	 * Reads and returns the current range (in cm) from the analog port.
 	 * -1 is returned if range is not being obtained form the analog port.
 	 */
-	public double getAnalogRangeCm()
-	{
-		return analogPotentiometer == null ? -1 : analogPotentiometer.get();
+	public double getAnalogRangeCm() {
+//		return analogPotentiometer == null ? -1 : analogPotentiometer.get();
+		return analogPotentiometer.get();
 	}
 
 	/**
 	 * Reads and returns the current range (in inches) from the analog port.
 	 * -1 is returned if range is not being obtained form the analog port.
 	 */
-	public double getAnalogRangeInches()
-	{
-		return analogPotentiometer == null ? -1 : analogPotentiometer.get() / cmPerInch;
+	public double getAnalogRangeInches() {
+//		return analogPotentiometer == null ? -1 : analogPotentiometer.get() / cmPerInch;
+		return analogPotentiometer.get() / cmPerInch;
 	}
 
 	/**
 	 * Returns the current range (in cm) from the serial port.
 	 * -1 is returned if range is not being obtained form the serial port.
 	 */
-	public double getSerialRangeCm()
-	{
+	public double getSerialRangeCm() {
 		return serialRangeCm;
 	}
 	
@@ -89,14 +89,12 @@ public class MaxBotixProximitySensorK implements Runnable
 	 * Returns the current range (in inches) from the serial port.
 	 * -1 is returned if range is not being obtained form the serial port.
 	 */
-	public double getSerialRangeInches()
-	{
+	public double getSerialRangeInches() {
 		return serialRangeCm == -1 ? -1 : serialRangeCm / cmPerInch;
 	}
 	
-	public void initDefaultCommand()
-	{
-		// Set the default command for a subsystem here.
+	public void initDefaultCommand() {
+		setDefaultCommand(new Reporter(this));
 	}
 
 	public void report()

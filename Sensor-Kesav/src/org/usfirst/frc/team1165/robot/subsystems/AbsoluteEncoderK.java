@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AbsoluteEncoderK extends ReportableSubsystem implements PIDSource {
 
-	AnalogInput ai = new AnalogInput(RobotMap.absoluteEncoderPort);
+	AnalogInput ai = new AnalogInput(RobotMap.ABSOLUTE_ENCODER_PORT);
 	AnalogPotentiometer pot = new AnalogPotentiometer(ai, 360.0, 0.0);
 
 	public void initDefaultCommand() {
@@ -24,6 +24,7 @@ public class AbsoluteEncoderK extends ReportableSubsystem implements PIDSource {
 		SmartDashboard.putNumber("ADC Value", ai.getValue());
 		SmartDashboard.putNumber("Degree", pot.get());
 	}
+	
 	@Override
 	public double pidGet() {
 		return pot.get();

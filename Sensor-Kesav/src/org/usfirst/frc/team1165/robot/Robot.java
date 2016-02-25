@@ -16,6 +16,7 @@ import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
 import org.usfirst.frc.team1165.robot.subsystems.ImuDigitalComboBoard;
 import org.usfirst.frc.team1165.robot.subsystems.MaxBotixProximitySensorK;
 import org.usfirst.frc.team1165.robot.subsystems.MaxBotixProximitySensorK.Model;
+import org.usfirst.frc.team1165.robot.subsystems.PIDDemoK;
 import org.usfirst.frc.team1165.robot.subsystems.VexRangeFinderK;
 
 import com.ni.vision.NIVision;
@@ -36,9 +37,11 @@ public class Robot extends IterativeRobot
 	
 	public static final AbsoluteEncoderK absoluteEncoder = new AbsoluteEncoderK();
 	public static final Accelerometer accelerometer = new Accelerometer(); 
-	public static final ImuDigitalComboBoard imu = new ImuDigitalComboBoard(Port.kOnboard, new DigitalInput(RobotMap.gyroInterruptChannel));
+	public static final ImuDigitalComboBoard imu = new ImuDigitalComboBoard(Port.kOnboard, new DigitalInput(RobotMap.GYRO_INTERRUPT_CHANNEL));
 	public static final MaxBotixProximitySensorK mb1013 = new MaxBotixProximitySensorK(Model.MB1013, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(3));
-	public static final VexRangeFinderK vexRangeFinderK = new VexRangeFinderK();
+//	public static final MaxBotixProximitySensorK mb1200 = new MaxBotixProximitySensorK(Model.MB1200, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(3));
+	public static final PIDDemoK pidDemo = new PIDDemoK();
+	public static final VexRangeFinderK vexRangeFinderK = new VexRangeFinderK(1, 1);
 
 	int session;
 	Image frame;
@@ -49,39 +52,26 @@ public class Robot extends IterativeRobot
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-	public void robotInit()
-	{
+	public void robotInit() {
 		oi = new OI();
-		// instantiate the command used for the autonomous period
-
-
 	}
 
-	public void disabledPeriodic()
-	{
+	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void autonomousInit()
-	{
-		// schedule the autonomous command (example)
+	public void autonomousInit() {
 		if (autonomousCommand != null) autonomousCommand.start();
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
-	public void autonomousPeriodic()
-	{
+	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void teleopInit()
-	{
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to 
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+	public void teleopInit() {
 		if (autonomousCommand != null) autonomousCommand.cancel();
 	}
 
@@ -89,24 +79,20 @@ public class Robot extends IterativeRobot
 	 * This function is called when the disabled button is hit.
 	 * You can use it to reset subsystems before shutting down.
 	 */
-	public void disabledInit()
-	{
-
+	public void disabledInit() {
 	}
 
 	/**
 	 * This function is called periodically during operator control
 	 */
-	public void teleopPeriodic()
-	{
+	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
-	public void testPeriodic()
-	{
+	public void testPeriodic() {
 		LiveWindow.run();
 	}
 
@@ -114,7 +100,7 @@ public class Robot extends IterativeRobot
 	{
 		NIVision.IMAQdxStartAcquisition(session);
 
-		/**
+		/*
 		 * grab an image, draw the circle, and provide it for the camera server
 		 * which will in turn send it to the dashboard.
 		 */
@@ -129,15 +115,14 @@ public class Robot extends IterativeRobot
 
 			CameraServer.getInstance().setImage(frame);
 
-			/** robot code here! **/
+//			robot code here!
 			Timer.delay(0.005);		// wait for a motor update time
 		}
 
 		NIVision.IMAQdxStopAcquisition(session);
 	}
 
-	public void test()
-	{
+	public void test() {
 		//
 	}
 }
