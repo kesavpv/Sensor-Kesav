@@ -56,8 +56,7 @@ public class Pulser
 	 * 
 	 * A frequency of 0 sets the pulsee idle.
 	 */
-	public void setFrequency(double frequency)
-	{
+	public void setFrequency(double frequency) {
 		setPeriod(0 == frequency ? 0 : 1 / frequency);
 	}
 	
@@ -68,8 +67,7 @@ public class Pulser
 	 * 
 	 * A period of 0 sets the pulsee idle.
 	 */
-	public void setPeriod(double period)
-	{
+	public void setPeriod(double period) {
 		this.period = period;
 	}
 }

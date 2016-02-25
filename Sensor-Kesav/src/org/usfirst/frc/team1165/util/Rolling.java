@@ -37,8 +37,7 @@ public class Rolling
 	 * Get current
 	 * @return
 	 */
-	public double getAverage()
-	{
+	public double getAverage() {
 		return total / size;
 	}
 }

@@ -12,16 +12,14 @@ public class SampleRate
 	/**
 	 * Construct an instance using a default sample window size.
 	 */
-	public SampleRate()
-	{
+	public SampleRate() {
 		this(100);
 	}
 	
 	/**
 	 * Construct an instance using a given sample window size.
 	 */
-	public SampleRate(int rollingWindowSize)
-	{
+	public SampleRate(int rollingWindowSize) {
 		this.rollingWindowSize = rollingWindowSize;
 	}
 	
@@ -55,8 +53,7 @@ public class SampleRate
 	 */
 	public double getSampleRate()
 	{
-		synchronized(this)
-		{
+		synchronized(this) {
 			return 1e9 / rolling.getAverage();
 		}
 	}

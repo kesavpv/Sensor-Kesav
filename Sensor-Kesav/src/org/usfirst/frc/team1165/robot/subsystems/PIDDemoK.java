@@ -28,7 +28,7 @@ public class PIDDemoK extends PIDSubsystem
 		maxFrequency = 0.8,
 		tolerance = 3;
 	
-	private PidLeds leds = new PidLeds(new Led(RobotMap.RED_LED_CHANNEL), new Led(RobotMap.GREEN_LED_CHANNEL));
+	private PidLeds leds = new PidLeds(RobotMap.RED_LED_CHANNEL, RobotMap.GREEN_LED_CHANNEL);
 	
 	public PIDDemoK()
 	{

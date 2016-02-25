@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
  */
 public class PidLeds implements PIDOutput, LiveWindowSendable
 {
-	private Pulser redPulser;
-	private Pulser greenPulser;
+	private Pulser redPulser, greenPulser;
+	
 	private double frequency;
 	
 	/**
@@ -30,16 +30,14 @@ public class PidLeds implements PIDOutput, LiveWindowSendable
 	/**
 	 * Construct using channel numbers.
 	 */
-	public PidLeds(int redChannel, int greenChannel)
-	{
+	public PidLeds(int redChannel, int greenChannel) {
 		this(new Led(redChannel), new Led(greenChannel));
 	}
 
 	/**
 	 * Construct using analog outputs.
 	 */
-	public PidLeds(AnalogOutput redLed, AnalogOutput greenLed)
-	{
+	public PidLeds(AnalogOutput redLed, AnalogOutput greenLed) {
 		this(new Led(redLed), new Led(greenLed));
 	}
 
@@ -58,8 +56,7 @@ public class PidLeds implements PIDOutput, LiveWindowSendable
 		greenPulser.setFrequency(output <= 0 ? 0 : 10.0 * output);
 	}
 	
-	public double get()
-	{
+	public double get() {
 		return frequency;
 	}
 
@@ -76,22 +73,19 @@ public class PidLeds implements PIDOutput, LiveWindowSendable
 	}
 
 	@Override
-	public ITable getTable()
-	{
+	public ITable getTable() {
 		return table;
 	}
 	
 	@Override
-	public String getSmartDashboardType()
-	{
+	public String getSmartDashboardType() {
 		return "Speed Controller";
 	}
 
 	@Override
 	public void updateTable()
 	{
-		if (null != table)
-		{
+		if (null != table) {
 			table.putNumber("Value", get());
 		}
 	}
