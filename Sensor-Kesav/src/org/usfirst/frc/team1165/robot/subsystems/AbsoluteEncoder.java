@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Class that provides access to the MA3-A10-250-N Absolute Encoder.
  */
-public class AbsoluteEncoderK extends ReportableSubsystem implements PIDSource
+public class AbsoluteEncoder extends ReportableSubsystem implements PIDSource
 {
 	private AnalogInput ai = new AnalogInput(RobotMap.ABSOLUTE_ENCODER_PORT);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(ai, 360.0, 0.0);

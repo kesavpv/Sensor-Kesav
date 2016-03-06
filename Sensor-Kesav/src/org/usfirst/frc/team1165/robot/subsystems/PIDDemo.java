@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * Flashing red LED indicates turn the shaft counterclockwise.
  * Both LEDs on solid indicates set point reached.
  */
-public class PIDDemoK extends PIDSubsystem
+public class PIDDemo extends PIDSubsystem
 {
 	private final static double kP = 0.05;
 	private final static double kI = 0.0;
@@ -32,7 +32,7 @@ public class PIDDemoK extends PIDSubsystem
 
 	private PidLeds leds = new PidLeds(RobotMap.RED_LED_CHANNEL, RobotMap.GREEN_LED_CHANNEL);
 
-	public PIDDemoK()
+	public PIDDemo()
 	{
 		super(kP, kI, kD);
 

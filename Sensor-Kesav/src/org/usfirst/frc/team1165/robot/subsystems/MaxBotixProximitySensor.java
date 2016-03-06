@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Class for obtaining data from a MaxBotix MB1013 or MB1200 Range Finder
  */
-public class MaxBotixProximitySensorK extends ReportableSubsystem implements Runnable
+public class MaxBotixProximitySensor extends ReportableSubsystem implements Runnable
 {
 	/**
 	 * Supported models
@@ -37,7 +37,7 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 	 * Constructs an instance using a serial port and/or analog input to
 	 * get data from the sonar.
 	 */
-	public MaxBotixProximitySensorK(Model model, SerialPort serialPort, AnalogInput analogInput)
+	public MaxBotixProximitySensor(Model model, SerialPort serialPort, AnalogInput analogInput)
 	{
 		this.model = model;
 		this.serialPort = serialPort;

@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Provides access to the VEX Ultrasonic Range Finder
  */
-public class VexRangeFinderK extends ReportableSubsystem
+public class VexRangeFinder extends ReportableSubsystem
 {
 	private Ultrasonic rangeFinder;
 	
 	/**
 	 * Construct given the ping (output) and echo (input) channels.
 	 */
-	public VexRangeFinderK(int pingChannel, int echoChannel)
+	public VexRangeFinder(int pingChannel, int echoChannel)
 	{
 		rangeFinder = new Ultrasonic(pingChannel, echoChannel);
 		rangeFinder.setAutomaticMode(true);
