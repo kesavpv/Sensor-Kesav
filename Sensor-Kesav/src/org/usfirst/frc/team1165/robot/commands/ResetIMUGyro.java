@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Resets the gyroscope on an IMU Digital Combo Board.
  */
-public class ResetGyro extends Command
+public class ResetIMUGyro extends Command
 {
-	public ResetGyro() {
+	public ResetIMUGyro() {
 		requires(Robot.imu);
 	}
 

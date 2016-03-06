@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class MaxBotixProximitySensorK extends ReportableSubsystem implements Runnable
 {
-	// Supported models:
+	/**
+	 * Supported models
+	 */
 	public enum Model
 	{
 		MB1013,
@@ -46,6 +48,7 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 			serialRangeFactorCm = (Model.MB1013 == model)
 				? 10		// 10 mm/cm
 				: 1;		// 1 cm/cm
+			
 			new Thread(this).start();
 		}
 		
@@ -55,6 +58,7 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 			double analogRangeCm = (Model.MB1013 == model)
 				? 512		// 5120 mm = 512 cm
 				: 1024;		// 1024 cm
+			
 			analogPotentiometer = new AnalogPotentiometer(analogInput, analogRangeCm, 0.0);
 		}
 	}
@@ -64,8 +68,7 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 	 * -1 is returned if range is not being obtained form the analog port.
 	 */
 	public double getAnalogRangeCm() {
-//		return analogPotentiometer == null ? -1 : analogPotentiometer.get();
-		return analogPotentiometer.get();
+		return analogPotentiometer == null ? -1 : analogPotentiometer.get();
 	}
 
 	/**
@@ -73,8 +76,7 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 	 * -1 is returned if range is not being obtained form the analog port.
 	 */
 	public double getAnalogRangeInches() {
-//		return analogPotentiometer == null ? -1 : analogPotentiometer.get() / cmPerInch;
-		return analogPotentiometer.get() / cmPerInch;
+		return analogPotentiometer == null ? -1 : analogPotentiometer.get() / cmPerInch;
 	}
 
 	/**
@@ -93,10 +95,16 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 		return serialRangeCm == -1 ? -1 : serialRangeCm / cmPerInch;
 	}
 	
+	/**
+	 * Set default command to report status on SmartDashboard
+	 */
 	public void initDefaultCommand() {
 		setDefaultCommand(new Reporter(this));
 	}
 
+	/**
+	 * Report meaningful information to the SmartDashboard.
+	 */
 	public void report()
 	{
 		if (null != serialPort)
@@ -124,20 +132,28 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 	@Override
 	public void run()
 	{
-		// Reset serial port to empty buffers:
+		/**
+		 * Reset serial port to empty buffers:
+		 */
 		serialPort.reset();
 		
-		// Start with an empty character buffer:
+		/**
+		 * Start with an empty character buffer:
+		 */
 		byte[] data = new byte[0];
 		int index = 0;
 		
 		int value = 0;
 		boolean startCharacterFound = false;
 		
-		// Loop forever reading and processing characters from the serial port.
+		/**
+		 * Loop forever reading and processing characters from the serial port.
+		 */
 		while (true)
 		{
-			// If all previously read characters have been processed, read more characters:
+			/**
+			 * If all previously read characters have been processed, read more characters:
+			 */
 			if (index >= data.length)
 			{
 				data = serialPort.read(serialPort.getBytesReceived());
@@ -148,11 +164,15 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 				index = 0;
 			}
 			
-			// Process a single character:
+			/**
+			 * Process a single character:
+			 */
 			byte c = data[index++];
 			if (startCharacterFound)
 			{
-				// If we have seen a 'R', look for a CR or digit:
+				/**
+				 * If we have seen a 'R', look for a CR or digit:
+				 */
 				if ('\r' == c)
 				{
 					serialRangeCm = value / serialRangeFactorCm;
@@ -162,13 +182,17 @@ public class MaxBotixProximitySensorK extends ReportableSubsystem implements Run
 				}
 				else
 				{
-					// Add current digit to value being accumulated:
+					/**
+					 * Add current digit to value being accumulated:
+					 */
 					value = value * 10 + (c - '0');
 				}
 			}
 			else
 			{
-				// See if character is the 'R' indicating the start of a value:
+				/**
+				 * See if character is the 'R' indicating the start of a value:
+				 */
 				startCharacterFound = 'R' == c;
 			}
 		}
