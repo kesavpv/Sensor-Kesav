@@ -22,7 +22,7 @@ public class SetPIDDemoSetPoint extends Command
     	this.setpoint = setpoint;
     }
 
-    protected SetPIDDemoSetPoint(String setpointKey) {
+    public SetPIDDemoSetPoint(String setpointKey) {
     	this.setpointKey = setpointKey;
     }
     

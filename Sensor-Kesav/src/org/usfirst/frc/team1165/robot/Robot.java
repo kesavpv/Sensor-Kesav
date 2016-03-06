@@ -1,28 +1,23 @@
 package org.usfirst.frc.team1165.robot;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.I2C.Port;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
 import org.usfirst.frc.team1165.robot.subsystems.AbsoluteEncoder;
 import org.usfirst.frc.team1165.robot.subsystems.Accelerometer;
+import org.usfirst.frc.team1165.robot.subsystems.Camera;
+import org.usfirst.frc.team1165.robot.subsystems.Camera.CameraMode;
 import org.usfirst.frc.team1165.robot.subsystems.ImuDigitalComboBoard;
 import org.usfirst.frc.team1165.robot.subsystems.MaxBotixProximitySensor;
 import org.usfirst.frc.team1165.robot.subsystems.MaxBotixProximitySensor.Model;
 import org.usfirst.frc.team1165.robot.subsystems.PIDDemo;
+import org.usfirst.frc.team1165.robot.subsystems.UserButton;
 import org.usfirst.frc.team1165.robot.subsystems.VexRangeFinder;
 
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.DrawMode;
-import com.ni.vision.NIVision.Image;
-import com.ni.vision.NIVision.ShapeMode;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,18 +28,22 @@ import com.ni.vision.NIVision.ShapeMode;
  */
 public class Robot extends IterativeRobot
 {
-	public static OI oi;
-	
+	/**
+	 * Subsystems
+	 */
+	public static final UserButton userButton = new UserButton();
+	public static final Accelerometer roboRIOAccelerometer = new Accelerometer();
+//	public static final Camera camera = new Camera(RobotMap.CAMERA_NAME, CameraMode.SUBSYSTEM);
 	public static final AbsoluteEncoder absoluteEncoder = new AbsoluteEncoder();
-	public static final Accelerometer accelerometer = new Accelerometer(); 
-	public static final ImuDigitalComboBoard imu = new ImuDigitalComboBoard(Port.kOnboard, new DigitalInput(RobotMap.GYRO_INTERRUPT_CHANNEL));
-	public static final MaxBotixProximitySensor mb1013 = new MaxBotixProximitySensor(Model.MB1013, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(3));
-//	public static final MaxBotixProximitySensorK mb1200 = new MaxBotixProximitySensorK(Model.MB1200, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(3));
-	public static final PIDDemo pidDemo = new PIDDemo();
-	public static final VexRangeFinder vexRangeFinderK = new VexRangeFinder(1, 1);
+	public static final VexRangeFinder vexRangeFinder = new VexRangeFinder(RobotMap.VEX_PING_CHANNEL, RobotMap.VEX_ECHO_CHANNEL);
 
-	int session;
-	Image frame;
+//	public static final MaxBotixProximitySensor mb1013 = new MaxBotixProximitySensor(Model.MB1013, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(RobotMap.ANALOG_INPUT_PORT));
+//	public static final MaxBotixProximitySensor mb1200 = new MaxBotixProximitySensor(Model.MB1200, new SerialPort(9600, SerialPort.Port.kOnboard), new AnalogInput(RobotMap.ANALOG_INPUT_PORT));
+
+//	public static final ImuDigitalComboBoard imu = new ImuDigitalComboBoard(I2C.Port.kOnboard, new DigitalInput(RobotMap.GYRO_INTERRUPT_CHANNEL));
+
+	public static final PIDDemo pidDemo = new PIDDemo();
+	public static OI oi;
 
 	Command autonomousCommand;
 
@@ -61,7 +60,8 @@ public class Robot extends IterativeRobot
 	}
 
 	public void autonomousInit() {
-		if (autonomousCommand != null) autonomousCommand.start();
+		if (autonomousCommand != null)
+			autonomousCommand.start();
 	}
 
 	/**
@@ -72,7 +72,8 @@ public class Robot extends IterativeRobot
 	}
 
 	public void teleopInit() {
-		if (autonomousCommand != null) autonomousCommand.cancel();
+		if (autonomousCommand != null)
+			autonomousCommand.cancel();
 	}
 
 	/**
@@ -94,35 +95,5 @@ public class Robot extends IterativeRobot
 	 */
 	public void testPeriodic() {
 		LiveWindow.run();
-	}
-
-	public void operatorControl()
-	{
-		NIVision.IMAQdxStartAcquisition(session);
-
-		/*
-		 * grab an image, draw the circle, and provide it for the camera server
-		 * which will in turn send it to the dashboard.
-		 */
-		NIVision.Rect rect = new NIVision.Rect(10, 10, 100, 100);
-
-		while (isOperatorControl() && isEnabled())
-		{
-
-			NIVision.IMAQdxGrab(session, frame, 1);
-			NIVision.imaqDrawShapeOnImage(frame, frame, rect,
-					DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f);
-
-			CameraServer.getInstance().setImage(frame);
-
-//			robot code here!
-			Timer.delay(0.005);		// wait for a motor update time
-		}
-
-		NIVision.IMAQdxStopAcquisition(session);
-	}
-
-	public void test() {
-		//
 	}
 }
